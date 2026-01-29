@@ -1,152 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Memory Bits</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --bg:#f6fbf9;
-  --card:#ffffff;
-  --primary:#9adbc5;      /* verde pastel */
-  --secondary:#b7d5f5;    /* azul pastel */
-  --accent:#c7c9ff;       /* morado pastel */
-  --text:#1f2937;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Inter,system-ui;
-  background:var(--bg);
-  color:var(--text);
-}
-
-/* HEADER */
-header{
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-header strong{
-  font-size:18px;
-  font-weight:700;
-}
-
-nav{display:flex;gap:8px}
-
-/* BOTONES */
-.btn{
-  padding:10px 14px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#fff;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.btn.primary{
-  background:var(--primary);
-  border:none;
-}
-
-.btn.secondary{
-  background:var(--secondary);
-  border:none;
-}
-
-/* LAYOUT */
-main{
-  max-width:480px; /* mobile first */
-  margin:auto;
-  padding:16px;
-}
-
-section{display:none}
-section.active{display:block}
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:56px 12px;
-}
-
-.hero h1{
-  font-size:32px;
-  margin-bottom:12px;
-}
-
-.hero p{
-  font-size:16px;
-  color:var(--muted);
-}
-
-/* CARDS */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:20px;
-}
-
-/* INPUTS */
-input, textarea{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  margin-bottom:14px;
-  font-size:15px;
-}
-
-textarea{min-height:120px}
-
-/* PREVIEW */
-.preview{
-  border:1px dashed var(--border);
-  border-radius:16px;
-  padding:20px;
-}
-
-.preview h3{
-  margin-top:0;
-  font-weight:700;
-  color:#000;
-}
-
-/* VIEWER */
-.viewer-card{
-  background:#fff;
-  border-radius:18px;
-  padding:24px;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:13px;
-  color:var(--muted);
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Bits — Tarjetas Digitales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f3fbf7;              /* fondo verde pastel muy suave */
+      --card:#ffffff;
+      --primary:#7bc8a4;         /* verde pastel principal */
+      --secondary:#b9ead4;       /* verde pastel secundario */
+      --accent:#ffd6a5;          /* acento cálido */
+      --text:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:var(--text)}
+    header{padding:24px;display:flex;justify-content:space-between;align-items:center}
+    header strong{font-size:20px;font-weight:700;color:#064e3b}
+    nav{display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer}
+    .btn.primary{background:var(--primary);color:#064e3b;border:none}
+    .btn.secondary{background:var(--secondary);color:#064e3b;border:none}
+    main{max-width:1100px;margin:auto;padding:32px}
+    section{display:none}
+    section.active{display:block}
+    .hero{text-align:center;padding:80px 16px}
+    .hero h1{font-size:42px;margin-bottom:16px;color:#064e3b}
+    .hero p{color:var(--muted);max-width:520px;margin:0 auto 32px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;max-width:420px;margin:auto}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);margin-bottom:12px;font-family:inherit}
+    textarea{min-height:120px;resize:vertical}
+    .preview{border:1px dashed var(--border);border-radius:16px;padding:24px;margin-top:24px}
+    .preview h3{color:#000;margin-top:0}
+    .viewer-card{background:#fff;border-radius:16px;padding:32px;max-width:420px;margin:auto}
+    .viewer-card h2{color:#000;margin-top:0}
+    footer{text-align:center;padding:24px;color:var(--muted)}
+  </style>
 </head>
-
 <body>
-
 <header>
   <strong>Memory Bits</strong>
   <nav>
     <button class="btn" onclick="show('home')">Inicio</button>
     <button class="btn" onclick="show('search')">Buscar</button>
-    <button class="btn primary" onclick="show('code')">Crea</button>
+    <button class="btn primary" onclick="show('edit-access')">Crea</button>
   </nav>
 </header>
 
@@ -155,47 +55,85 @@ footer{
 <section id="home" class="active">
   <div class="hero">
     <h1>Recuerdos que se eligen guardar.</h1>
-    <p>Crea una tarjeta digital y compártela como imagen o QR.</p>
+    <p style="margin-bottom:40px">Crea una tarjeta digital única. Personalízala, genera una imagen y un QR para compartir.</p>
+
+    <div class="card" style="margin-top:24px;text-align:left;max-width:480px">
+      <p><strong>1. Accede con tu código.</strong><br>No es una llave. Es una decisión.</p>
+      <p><strong>2. Dale un título.</strong><br>Nombrar es elegir qué permanece.</p>
+      <p><strong>3. Escribe.</strong><br>Lo que fue, lo que es…<br>o lo que nunca dijiste.</p>
+      <p><strong>4. Compártelo si debe viajar.</strong><br>Como imagen.<br>Como símbolo.<br>O como un QR esperando ser encontrado.</p>
+      <p><strong>5. Este es tu espacio.</strong><br>Aquí no se explica.<br>Aquí dejas un legado.</p>
+    </div>
+
+    <div style="margin-top:32px">
+      <button class="btn" onclick="show('edit-access')" style="margin-left:12px">Tengo un código para editar</button>
+      <button class="btn" onclick="show('view')" style="margin-left:12px">Ver una tarjeta</button>
+    </div>
+  </div>
   </div>
 </section>
 
-<section id="code">
-  <div class="card">
-    <h2>Acceso</h2>
-    <p style="color:var(--muted)">Ingresa tu código</p>
-    <input id="createCode" placeholder="Código" />
-    <button class="btn primary" onclick="validateCode()">Continuar</button>
+<section id="edit-access">
+  <div class="card" style="text-align:left">
+    <h2>Acceso para crear</h2>
+    <p style="color:var(--muted);margin-bottom:24px">No todo recuerdo pide existir. Algunos se eligen.</p>
+
+    <label style="font-size:14px">Código de acceso</label>
+    <input id="createCode" placeholder="Código de acceso" />
+    <p style="font-size:13px;color:var(--muted);margin-top:-6px;margin-bottom:16px">
+      Este código define si este recuerdo puede nacer aquí.
+    </p>
+
+    <label style="font-size:14px">Correo electrónico</label>
+    <input id="emailInput" placeholder="Correo electrónico" />
+    <p style="font-size:13px;color:var(--muted);margin-top:-6px;margin-bottom:16px">
+      Para que este recuerdo pueda volver a ti.
+    </p>
+
+    <button class="btn primary" onclick="validateCreateCode()">Enviar</button>
+
+    <p id="codeSent" style="display:none;font-size:14px;color:#047857;margin-top:12px">
+      Código enviado. Revisa tu correo.
+    </p>
+
+    <div style="margin-top:24px">
+      <label style="font-size:14px">Código recibido</label>
+      <input id="userCode" placeholder="Código recibido" />
+      <p style="font-size:13px;color:var(--muted);margin-top:-6px">
+        Escríbelo tal como llegó a ti.
+      </p>
+    </div>
+
+    <p id="codeError" style="color:#ef4444;font-size:14px;display:none;margin-top:12px">
+      Este código no abre este espacio.
+    </p>
   </div>
 </section>
 
 <section id="editor">
   <div class="card">
     <h2>Crea</h2>
+    <input id="titleInput" placeholder="Título de la tarjeta" />
 
-    <input id="titleInput" placeholder="Título" />
-
-    <label style="font-size:13px;color:var(--muted)">Color del cuerpo</label>
-    <div style="display:flex;gap:8px;margin:10px 0">
-      <button class="btn secondary" style="background:#1f2937;color:#fff" onclick="setColor('#1f2937')"></button>
-      <button class="btn secondary" style="background:#3b82f6" onclick="setColor('#3b82f6')"></button>
-      <button class="btn secondary" style="background:#ef4444" onclick="setColor('#ef4444')"></button>
-      <button class="btn secondary" style="background:#22c55e" onclick="setColor('#22c55e')"></button>
-      <button class="btn secondary" style="background:#ec4899" onclick="setColor('#ec4899')"></button>
-      <button class="btn secondary" style="background:#8b5cf6" onclick="setColor('#8b5cf6')"></button>
+    <label style="font-size:14px;color:var(--muted)">Color del texto del cuerpo</label>
+    <div style="display:flex;gap:10px;margin:8px 0 12px">
+      <button type="button" class="btn secondary" style="background:#1f2937;color:#fff" onclick="setColor('#1f2937')"></button>
+      <button type="button" class="btn secondary" style="background:#6c63ff" onclick="setColor('#6c63ff')"></button>
+      <button type="button" class="btn secondary" style="background:#ff8ccf" onclick="setColor('#ff8ccf')"></button>
+      <button type="button" class="btn secondary" style="background:#ffd166" onclick="setColor('#ffd166')"></button>
     </div>
 
-    <textarea id="bodyInput" placeholder="Escribe tu recuerdo…"></textarea>
+    <textarea id="bodyInput" placeholder="Mensaje"></textarea>
 
-    <div style="font-size:22px;display:flex;gap:10px;margin-bottom:14px">
+    <div style="display:flex;gap:8px;font-size:22px;cursor:pointer;margin-bottom:16px">
       <span onclick="addEmoji('😊')">😊</span>
       <span onclick="addEmoji('❤️')">❤️</span>
       <span onclick="addEmoji('✨')">✨</span>
-      <span onclick="addEmoji('🌱')">🌱</span>
+      <span onclick="addEmoji('🔥')">🔥</span>
+      <span onclick="addEmoji('🙏')">🙏</span>
     </div>
 
-    <button class="btn secondary" onclick="renderPreview();show('preview')">
-      Vista previa
-    </button>
+    <button class="btn secondary" onclick="renderPreview();show('preview')">Vista previa</button>
   </div>
 </section>
 
@@ -203,99 +141,194 @@ footer{
   <div class="card">
     <h2>Vista previa</h2>
     <div class="preview">
-      <h3 id="previewTitle"></h3>
+      <h3 id="previewTitle" style="color:#000"></h3>
       <p id="previewBody"></p>
     </div>
-
-    <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn" onclick="show('editor')">Editar</button>
-      <button class="btn secondary" onclick="generateImage()">Compartir tarjeta</button>
-      <button class="btn primary" onclick="show('qr')">QR</button>
+    <div style="margin-top:16px">
+      <button class="btn" onclick="show('editor')">Volver a editar</button>
+      <button class="btn" style="margin-left:8px" onclick="generateImage()">Comparte esta tarjeta</button>
+      <button class="btn primary" style="margin-left:8px" onclick="show('qr')">Generar QR</button>
     </div>
   </div>
 </section>
 
 <section id="qr">
   <div class="card" style="text-align:center">
-    <h2>QR</h2>
-    <img id="qrImage" style="width:200px;height:200px;margin:20px auto;display:block"/>
-    <button class="btn secondary" onclick="downloadQR()">Compartir QR</button>
-  </div>
-</section>
-
-<section id="search">
-  <div class="card">
-    <h2>Buscar</h2>
-    <input placeholder="Texto o enlace" />
-    <button class="btn primary" onclick="show('view')">Buscar</button>
+    <h2>QR de la tarjeta</h2>
+    <p class="meta">Este QR abre la vista pública de la tarjeta</p>
+    <img id="qrImage" alt="QR" style="width:220px;height:220px;border-radius:12px;margin:24px auto;display:block" />
+    <div style="margin-top:16px">
+      <button class="btn" onclick="downloadQR()">Descargar QR</button>
+      <button class="btn primary" style="margin-left:8px" onclick="show('home')">Finalizar</button>
+    </div>
   </div>
 </section>
 
 <section id="view">
   <div class="viewer-card">
-    <h2>Título</h2>
-    <p style="color:#3b82f6">Contenido visible.</p>
+    <h2>Título de la tarjeta</h2>
+    <p style="color:#6c63ff">Este es el contenido visible para cualquier persona.</p>
+  </div>
+</section>
+
+<section id="search">
+  <div class="card">
+    <h2>Buscar tarjeta</h2>
+    <input placeholder="Palabras, título o enlace" />
+    <button class="btn primary" onclick="show('view')">Buscar</button>
   </div>
 </section>
 
 </main>
 
-<footer>Memory Bits — demo</footer>
+<footer>Memory Bits — recuerdos que se eligen guardar</footer>
 
 <script>
-let selectedColor='#1f2937';
+  // DEMO guiado
+  let masterAttempts = 0;
+  function validateCreateCode(){
+    const input = document.getElementById('createCode').value.trim();
+    const email = document.getElementById('emailInput')?.value?.trim();
 
-function show(id){
-  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+    // Punto 1: silencio mientras escribe (validamos solo al enviar)
+    if(!input){ return; }
 
-function validateCode(){
-  if(createCode.value.length>=4) show('editor');
-}
+    masterAttempts += 1;
 
-function setColor(c){selectedColor=c}
-function addEmoji(e){bodyInput.value+=e}
+    // simulación de código agotado (demo)
+    if(input === 'AGOTADO'){
+      showMessage('codeError','Este código ya dejó todo lo que podía aquí.');
+      return;
+    }
 
-function renderPreview(){
-  previewTitle.innerText=titleInput.value||'Sin título';
-  previewBody.innerText=bodyInput.value||'';
-  previewBody.style.color=selectedColor;
-  qrImage.src=`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://memorybits.demo`;
-}
+    // primer intento fallido: silencio
+    if(input.length < 4 && masterAttempts === 1){ return; }
 
-function generateImage(){
-  const c=document.createElement('canvas');
-  c.width=c.height=1080;
-  const x=c.getContext('2d');
-  x.fillStyle='#fff';x.fillRect(0,0,1080,1080);
-  x.fillStyle='#000';x.font='bold 56px Inter';x.textAlign='center';
-  x.fillText(previewTitle.innerText,540,200);
-  x.fillStyle=selectedColor;x.font='36px Inter';
-  wrap(x,previewBody.innerText,540,320,800,48);
-  const a=document.createElement('a');
-  a.download='memory-bit.png';
-  a.href=c.toDataURL();a.click();
-}
+    // segundo intento fallido: mensaje
+    if(input.length < 4 && masterAttempts > 1){
+      showMessage('codeError','Este código no abre este espacio.');
+      return;
+    }
 
-function downloadQR(){
-  const a=document.createElement('a');
-  a.href=qrImage.src;
-  a.download='qr-memory-bit.png';
-  a.click();
-}
+    // correo: solo validar al enviar
+    if(!email || !email.includes('@')){
+      showMessage('codeError','Algo no encaja del todo.');
+      return;
+    }
 
-function wrap(ctx,text,x,y,max,l){
-  let line='',w=text.split(' ');
-  for(let i=0;i<w.length;i++){
-    let t=line+w[i]+' ';
-    if(ctx.measureText(t).width>max){
-      ctx.fillText(line,x,y);line=w[i]+' ';y+=l;
-    }else line=t;
+    // éxito silencioso
+    hideMessage('codeError');
+    show('editor');
   }
-  ctx.fillText(line,x,y);
-}
-</script>
 
+  function showMessage(id,text){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerText = text;
+    el.style.display = 'block';
+  }
+
+  function hideMessage(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.style.display = 'none';
+  }
+    document.getElementById('codeError').style.display = 'none';
+    show('editor');
+  }
+
+  function runDemo(){
+    show('editor');
+    document.getElementById('titleInput').value = 'Gracias por estar aquí 💖';
+    document.getElementById('bodyInput').value = 'Esta es una tarjeta digital de ejemplo.
+
+Puedes cambiar colores, emojis y luego generar una imagen o un QR para compartir.';
+    selectedColor = '#ff8ccf';
+  }
+
+  let selectedColor = '#1f2937';
+
+  function show(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function setColor(color){ selectedColor = color; }
+
+  function addEmoji(emoji){
+    const textarea = document.getElementById('bodyInput');
+    textarea.value += emoji;
+    textarea.focus();
+  }
+
+  function renderPreview(){
+    const title = document.getElementById('titleInput').value || 'Sin título';
+    const bodyText = document.getElementById('bodyInput').value || '—';
+
+    document.getElementById('previewTitle').innerText = title;
+    const body = document.getElementById('previewBody');
+    body.innerText = bodyText;
+    body.style.color = selectedColor;
+
+    // generar URL pública silenciosa (demo)
+    window.publicCardURL = `https://tarjetas.demo/ver?title=${encodeURIComponent(title)}&body=${encodeURIComponent(bodyText)}`;
+
+    // preparar QR
+    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(window.publicCardURL)}`;
+    const qrImg = document.getElementById('qrImage');
+    if(qrImg) qrImg.src = qrURL;
+  }
+
+  function generateImage(){
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1080;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 56px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(document.getElementById('previewTitle').innerText,540,180);
+
+    ctx.fillStyle = selectedColor;
+    ctx.font = '36px Inter, sans-serif';
+    ctx.textAlign = 'center';
+
+    const text = document.getElementById('previewBody').innerText;
+    wrapText(ctx,text,540,300,800,48);
+
+    const link = document.createElement('a');
+    link.download = 'tarjeta.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function downloadQR(){
+    const img = document.getElementById('qrImage');
+    if(!img || !img.src) return;
+    const link = document.createElement('a');
+    link.href = img.src;
+    link.download = 'qr-tarjeta.png';
+    link.click();
+  }
+
+  function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+    const words = text.split(' ');
+    let line = '';
+    for(let n=0;n<words.length;n++){
+      const testLine = line + words[n] + ' ';
+      const metrics = ctx.measureText(testLine);
+      if(metrics.width > maxWidth && n>0){
+        ctx.fillText(line,x,y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      } else line = testLine;
+    }
+    ctx.fillText(line,x,y);
+  }
+</script>
 </body>
 </html>
