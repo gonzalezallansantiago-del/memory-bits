@@ -1,224 +1,300 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Memory Bits</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Memory Bits</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#f5f7fb;
-      --panel:#ffffff;
-      --border:#dfe3ee;
-      --text:#1f2937;
-      --muted:#6b7280;
+<style>
+:root{
+  --bg:#f6fbf9;
+  --card:#ffffff;
+  --primary:#9adbc5;      /* verde pastel */
+  --secondary:#b7d5f5;    /* azul pastel */
+  --accent:#c7c9ff;       /* morado pastel */
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+}
 
-      --green:#b8e6c9;
-      --blue:#bcdcff;
+*{box-sizing:border-box}
 
-      --radius:16px;
-      --font:'IBM Plex Sans', system-ui;
-      --mono:'IBM Plex Mono', monospace;
-    }
+body{
+  margin:0;
+  font-family:Inter,system-ui;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--font);
-      background:var(--bg);
-      color:var(--text);
-    }
+/* HEADER */
+header{
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    header{
-      padding:24px;
-      text-align:center;
-    }
+header strong{
+  font-size:18px;
+  font-weight:700;
+}
 
-    header h1{
-      margin:0;
-      font-size:2.4rem;
-      color:#4a7bd0;
-    }
+nav{display:flex;gap:8px}
 
-    header p{
-      margin-top:8px;
-      color:var(--muted);
-    }
+/* BOTONES */
+.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:14px;
+  cursor:pointer;
+}
 
-    nav{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      margin-top:20px;
-      flex-wrap:wrap;
-    }
+.btn.primary{
+  background:var(--primary);
+  border:none;
+}
 
-    .btn{
-      padding:14px 22px;
-      border-radius:999px;
-      border:none;
-      cursor:pointer;
-      font-size:1rem;
-    }
+.btn.secondary{
+  background:var(--secondary);
+  border:none;
+}
 
-    .btn.green{background:var(--green)}
-    .btn.blue{background:var(--blue)}
+/* LAYOUT */
+main{
+  max-width:480px; /* mobile first */
+  margin:auto;
+  padding:16px;
+}
 
-    main{
-      max-width:720px;
-      margin:auto;
-      padding:24px;
-    }
+section{display:none}
+section.active{display:block}
 
-    section{display:none}
-    section.active{display:block}
+/* HERO */
+.hero{
+  text-align:center;
+  padding:56px 12px;
+}
 
-    .memory-card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      margin-bottom:16px;
-    }
+.hero h1{
+  font-size:32px;
+  margin-bottom:12px;
+}
 
-    .memory-card h3{
-      margin:0 0 8px 0;
-    }
+.hero p{
+  font-size:16px;
+  color:var(--muted);
+}
 
-    .memory-card .micro{
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-    }
+/* CARDS */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+}
 
-    input, textarea{
-      width:100%;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      font-family:var(--font);
-      margin-bottom:12px;
-    }
+/* INPUTS */
+input, textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  margin-bottom:14px;
+  font-size:15px;
+}
 
-    textarea{min-height:120px}
+textarea{min-height:120px}
 
-    .micro{
-      color:var(--muted);
-      font-size:0.9rem;
-      text-align:center;
-      margin-top:24px;
-    }
-  </style>
+/* PREVIEW */
+.preview{
+  border:1px dashed var(--border);
+  border-radius:16px;
+  padding:20px;
+}
+
+.preview h3{
+  margin-top:0;
+  font-weight:700;
+  color:#000;
+}
+
+/* VIEWER */
+.viewer-card{
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:var(--muted);
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Memory Bits</h1>
-  <p>Recuerdos que se eligen guardar.</p>
-
+  <strong>Memory Bits</strong>
   <nav>
-    <button class="btn green" onclick="show('home')">Inicio</button>
-    <button class="btn blue" onclick="show('create')">Crea una tarjeta</button>
+    <button class="btn" onclick="show('home')">Inicio</button>
+    <button class="btn" onclick="show('search')">Buscar</button>
+    <button class="btn primary" onclick="show('code')">Crea</button>
   </nav>
 </header>
 
 <main>
 
-  <!-- HOME -->
-  <section id="home" class="active">
-    <div id="memory-list"></div>
-  </section>
+<section id="home" class="active">
+  <div class="hero">
+    <h1>Recuerdos que se eligen guardar.</h1>
+    <p>Crea una tarjeta digital y compártela como imagen o QR.</p>
+  </div>
+</section>
 
-  <!-- CREATE -->
-  <section id="create">
-    <h2>Crear un Memory Bit</h2>
+<section id="code">
+  <div class="card">
+    <h2>Acceso</h2>
+    <p style="color:var(--muted)">Ingresa tu código</p>
+    <input id="createCode" placeholder="Código" />
+    <button class="btn primary" onclick="validateCode()">Continuar</button>
+  </div>
+</section>
+
+<section id="editor">
+  <div class="card">
+    <h2>Crea</h2>
 
     <input id="titleInput" placeholder="Título" />
-    <textarea id="contentInput" placeholder="Escribe lo que deseas dejar aquí…"></textarea>
 
-    <button class="btn blue" onclick="saveMemory()">Guardar recuerdo</button>
+    <label style="font-size:13px;color:var(--muted)">Color del cuerpo</label>
+    <div style="display:flex;gap:8px;margin:10px 0">
+      <button class="btn secondary" style="background:#1f2937;color:#fff" onclick="setColor('#1f2937')"></button>
+      <button class="btn secondary" style="background:#3b82f6" onclick="setColor('#3b82f6')"></button>
+      <button class="btn secondary" style="background:#ef4444" onclick="setColor('#ef4444')"></button>
+      <button class="btn secondary" style="background:#22c55e" onclick="setColor('#22c55e')"></button>
+      <button class="btn secondary" style="background:#ec4899" onclick="setColor('#ec4899')"></button>
+      <button class="btn secondary" style="background:#8b5cf6" onclick="setColor('#8b5cf6')"></button>
+    </div>
 
-    <p class="micro">
-      Lo que se guarda aquí no se edita.<br>
-      Solo permanece.
-    </p>
-  </section>
+    <textarea id="bodyInput" placeholder="Escribe tu recuerdo…"></textarea>
+
+    <div style="font-size:22px;display:flex;gap:10px;margin-bottom:14px">
+      <span onclick="addEmoji('😊')">😊</span>
+      <span onclick="addEmoji('❤️')">❤️</span>
+      <span onclick="addEmoji('✨')">✨</span>
+      <span onclick="addEmoji('🌱')">🌱</span>
+    </div>
+
+    <button class="btn secondary" onclick="renderPreview();show('preview')">
+      Vista previa
+    </button>
+  </div>
+</section>
+
+<section id="preview">
+  <div class="card">
+    <h2>Vista previa</h2>
+    <div class="preview">
+      <h3 id="previewTitle"></h3>
+      <p id="previewBody"></p>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="show('editor')">Editar</button>
+      <button class="btn secondary" onclick="generateImage()">Compartir tarjeta</button>
+      <button class="btn primary" onclick="show('qr')">QR</button>
+    </div>
+  </div>
+</section>
+
+<section id="qr">
+  <div class="card" style="text-align:center">
+    <h2>QR</h2>
+    <img id="qrImage" style="width:200px;height:200px;margin:20px auto;display:block"/>
+    <button class="btn secondary" onclick="downloadQR()">Compartir QR</button>
+  </div>
+</section>
+
+<section id="search">
+  <div class="card">
+    <h2>Buscar</h2>
+    <input placeholder="Texto o enlace" />
+    <button class="btn primary" onclick="show('view')">Buscar</button>
+  </div>
+</section>
+
+<section id="view">
+  <div class="viewer-card">
+    <h2>Título</h2>
+    <p style="color:#3b82f6">Contenido visible.</p>
+  </div>
+</section>
 
 </main>
 
+<footer>Memory Bits — demo</footer>
+
 <script>
-  function show(id){
-    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+let selectedColor='#1f2937';
+
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function validateCode(){
+  if(createCode.value.length>=4) show('editor');
+}
+
+function setColor(c){selectedColor=c}
+function addEmoji(e){bodyInput.value+=e}
+
+function renderPreview(){
+  previewTitle.innerText=titleInput.value||'Sin título';
+  previewBody.innerText=bodyInput.value||'';
+  previewBody.style.color=selectedColor;
+  qrImage.src=`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://memorybits.demo`;
+}
+
+function generateImage(){
+  const c=document.createElement('canvas');
+  c.width=c.height=1080;
+  const x=c.getContext('2d');
+  x.fillStyle='#fff';x.fillRect(0,0,1080,1080);
+  x.fillStyle='#000';x.font='bold 56px Inter';x.textAlign='center';
+  x.fillText(previewTitle.innerText,540,200);
+  x.fillStyle=selectedColor;x.font='36px Inter';
+  wrap(x,previewBody.innerText,540,320,800,48);
+  const a=document.createElement('a');
+  a.download='memory-bit.png';
+  a.href=c.toDataURL();a.click();
+}
+
+function downloadQR(){
+  const a=document.createElement('a');
+  a.href=qrImage.src;
+  a.download='qr-memory-bit.png';
+  a.click();
+}
+
+function wrap(ctx,text,x,y,max,l){
+  let line='',w=text.split(' ');
+  for(let i=0;i<w.length;i++){
+    let t=line+w[i]+' ';
+    if(ctx.measureText(t).width>max){
+      ctx.fillText(line,x,y);line=w[i]+' ';y+=l;
+    }else line=t;
   }
-
-  function generateMemoryBitID(){
-    const year = new Date().getFullYear();
-    const random = Math.random().toString(16).substr(2,6).toUpperCase();
-    return `MB-${year}-${random}`;
-  }
-
-  function saveMemory(){
-    const title = document.getElementById("titleInput").value.trim();
-    const content = document.getElementById("contentInput").value.trim();
-
-    if(!title || !content){
-      alert("Escribe un título y un contenido.");
-      return;
-    }
-
-    const cards = JSON.parse(localStorage.getItem("memoryBits_cards")) || [];
-
-    cards.push({
-      id: generateMemoryBitID(),
-      title,
-      content,
-      createdAt: Date.now()
-    });
-
-    localStorage.setItem("memoryBits_cards", JSON.stringify(cards));
-
-    document.getElementById("titleInput").value = "";
-    document.getElementById("contentInput").value = "";
-
-    loadMemoryBits();
-    show("home");
-  }
-
-  function loadMemoryBits(){
-    const container = document.getElementById("memory-list");
-    container.innerHTML = "";
-
-    const cards = JSON.parse(localStorage.getItem("memoryBits_cards")) || [];
-
-    if(cards.length === 0){
-      container.innerHTML = `
-        <p class="micro">
-          Aún no hay recuerdos aquí.<br>
-          El primero siempre es un acto de valentía.
-        </p>
-      `;
-      return;
-    }
-
-    cards
-      .sort((a,b)=>b.createdAt-a.createdAt)
-      .forEach(card=>{
-        const div = document.createElement("div");
-        div.className = "memory-card";
-        div.innerHTML = `
-          <h3>${card.title}</h3>
-          <p>${card.content}</p>
-          <div class="micro">${card.id}</div>
-        `;
-        container.appendChild(div);
-      });
-  }
-
-  document.addEventListener("DOMContentLoaded", loadMemoryBits);
+  ctx.fillText(line,x,y);
+}
 </script>
 
 </body>
